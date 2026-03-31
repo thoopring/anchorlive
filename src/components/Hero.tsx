@@ -1,15 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import {
-  Mic,
-  Monitor,
-  Camera,
-  PenTool,
-  Palette,
-  Settings,
-  User,
-} from "lucide-react";
+import Image from "next/image";
 
 function useReveal(threshold = 0.12) {
   const ref = useRef<HTMLDivElement>(null);
@@ -56,15 +48,6 @@ function R({
     </div>
   );
 }
-
-const toolbarItems = [
-  { icon: Mic, label: "마이크", active: true },
-  { icon: Monitor, label: "화면공유", active: false },
-  { icon: Camera, label: "카메라", active: false },
-  { icon: PenTool, label: "그리기", active: false },
-  { icon: Palette, label: "배경", active: false },
-  { icon: Settings, label: "설정", active: false },
-];
 
 export default function Hero() {
   return (
@@ -157,155 +140,15 @@ export default function Hero() {
 
           {/* Right mockup */}
           <R delay={0.1}>
-            <div className="rounded-[20px] overflow-hidden bg-dark shadow-[0_24px_60px_rgba(0,0,0,.12)]">
-              {/* Browser chrome */}
-              <div className="flex items-center gap-1.5 px-4 py-3 bg-[#0F172A]">
-                {["#FF5F57", "#FEBC2E", "#28C840"].map((c) => (
-                  <div
-                    key={c}
-                    className="w-2.5 h-2.5 rounded-full"
-                    style={{ background: c }}
-                  />
-                ))}
-                <span className="ml-3 text-[11px] text-[#475569] font-mono">
-                  live.anchorlive.co.kr/broadcasterLive
-                </span>
-              </div>
-
-              {/* Main area */}
-              <div className="p-4 relative">
-                {/* Chart */}
-                <div
-                  className="relative rounded-xl h-[200px] overflow-hidden"
-                  style={{
-                    background:
-                      "linear-gradient(180deg, #1E293B, #0F172A)",
-                  }}
-                >
-                  <svg
-                    width="100%"
-                    height="100%"
-                    viewBox="0 0 440 200"
-                    className="absolute bottom-0"
-                  >
-                    {[
-                      35, 50, 43, 58, 66, 52, 70, 80, 68, 84, 90, 75, 87,
-                      100, 93, 105, 102, 110, 97, 113, 108, 120,
-                    ].map((h, i) => {
-                      const x = 12 + i * 19;
-                      const up = i % 3 !== 0;
-                      return (
-                        <g key={i}>
-                          <line
-                            x1={x}
-                            y1={200 - h - 8}
-                            x2={x}
-                            y2={200 - h + 16}
-                            stroke={up ? "#22C55E" : "#EF4444"}
-                            strokeWidth="1.2"
-                          />
-                          <rect
-                            x={x - 3.5}
-                            y={200 - h}
-                            width="7"
-                            height="12"
-                            rx="1"
-                            fill={up ? "#22C55E" : "#EF4444"}
-                            opacity=".8"
-                          />
-                        </g>
-                      );
-                    })}
-                    <path
-                      d="M12,165 Q60,150 100,140 T200,112 T300,80 T430,58"
-                      fill="none"
-                      stroke="#FBBF24"
-                      strokeWidth="1.2"
-                      opacity=".5"
-                    />
-                    <path
-                      d="M12,170 Q80,162 140,152 T250,125 T380,92 T430,78"
-                      fill="none"
-                      stroke="#EC4899"
-                      strokeWidth="1"
-                      opacity=".3"
-                    />
-                  </svg>
-
-                  {/* LIVE badge */}
-                  <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-primary/90">
-                    <div
-                      className="w-[5px] h-[5px] rounded-full bg-white"
-                      style={{ animation: "pulse 1.5s infinite" }}
-                    />
-                    <span className="text-[10px] font-bold text-white">
-                      LIVE
-                    </span>
-                  </div>
-
-                  {/* Viewer count */}
-                  <div className="absolute top-2.5 right-2.5 text-[10px] text-[#94A3B8] bg-black/40 px-2 py-[3px] rounded">
-                    접속자 127명
-                  </div>
-                </div>
-
-                {/* Toolbar */}
-                <div className="flex gap-2 mt-3 justify-center flex-wrap">
-                  {toolbarItems.map((item) => {
-                    const Icon = item.icon;
-                    return (
-                      <div
-                        key={item.label}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-medium ${
-                          item.active
-                            ? "bg-primary text-white"
-                            : "bg-white/[.06] text-[#94A3B8]"
-                        }`}
-                      >
-                        <Icon className="w-3.5 h-3.5" />
-                        {item.label}
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* PIP */}
-                <div
-                  className="absolute bottom-14 right-7 w-[72px] h-[72px] rounded-xl border border-white/10 items-center justify-center hidden sm:flex"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, #334155, #1E293B)",
-                  }}
-                >
-                  <User className="w-7 h-7 text-white/40" />
-                </div>
-
-                {/* Chat sidebar */}
-                <div className="absolute top-0 right-0 w-[140px] h-full bg-[#0F172A]/80 border-l border-white/[.06] p-2.5 flex-col text-[10px] hidden md:flex">
-                  <div className="font-bold text-[#E2E8F0] mb-1.5 pb-1 border-b border-white/[.06]">
-                    채팅
-                  </div>
-                  {[
-                    { n: "투자고수", m: "이 구간 주목", c: "#3182F6" },
-                    { n: "주린이", m: "감사합니다", c: "#94A3B8" },
-                    { n: "달인", m: "매수 타점!", c: "#94A3B8" },
-                    { n: "코인맨", m: "좋은 분석이네요", c: "#94A3B8" },
-                  ].map((chat) => (
-                    <div key={chat.n} className="mb-1 leading-snug">
-                      <span
-                        className="font-semibold"
-                        style={{ color: chat.c }}
-                      >
-                        {chat.n}
-                      </span>
-                      <span className="text-[#94A3B8] ml-1">{chat.m}</span>
-                    </div>
-                  ))}
-                  <div className="mt-auto px-2 py-1.5 rounded-md bg-white/5 text-[#475569] text-[10px]">
-                    메시지 입력
-                  </div>
-                </div>
-              </div>
+            <div className="rounded-[20px] overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,.12)]">
+              <Image
+                src="/images/hero-mockup.png"
+                alt="앵커라이브 2.0 실시간 증권방송 화면 - 캔들차트, LIVE 방송, 실시간 채팅"
+                width={1200}
+                height={800}
+                className="w-full h-auto"
+                priority
+              />
             </div>
           </R>
         </div>
