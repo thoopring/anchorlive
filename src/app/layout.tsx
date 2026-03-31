@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     "증권방송솔루션, 실시간방송, WebRTC방송, 주식방송프로그램, 코인방송솔루션, 증권라이브, 앵커라이브, 소프트브리지, 화상방송, 투자자문방송, 증권방송플랫폼, 실시간스트리밍",
   openGraph: {
     title: "앵커라이브 2.0 | WebRTC 실시간 증권방송 솔루션",
-    description: "설치 없이 브라우저만으로 실시간 증권·코인 방송",
+    description: "설치 없이 브라우저만으로 실시간 증권·코인 방송. 무료 데모 체험 가능.",
     url: "https://anchorlive.co.kr",
     siteName: "앵커라이브",
     locale: "ko_KR",
@@ -168,6 +168,21 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {/* Google Analytics 4 — TODO: Replace G-XXXXXXXXXX with actual measurement ID */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XXXXXXXXXX');
+            `,
+          }}
         />
       </head>
       <body className="antialiased">{children}</body>

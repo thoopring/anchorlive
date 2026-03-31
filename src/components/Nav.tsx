@@ -7,7 +7,7 @@ const links = [
   { label: "도입 사례", href: "#cases" },
   { label: "기술 스펙", href: "#tech" },
   { label: "데모 체험", href: "#demo" },
-  { label: "FAQ", href: "#faq" },
+  { label: "요금 안내", href: "#pricing" },
   { label: "도입 문의", href: "#contact" },
 ];
 

@@ -4,12 +4,15 @@ import TrustBar from "@/components/TrustBar";
 import Solutions from "@/components/Solutions";
 import Comparison from "@/components/Comparison";
 import TechSpec from "@/components/TechSpec";
+import Testimonials from "@/components/Testimonials";
 import UseCases from "@/components/UseCases";
 import Demo from "@/components/Demo";
+import Pricing from "@/components/Pricing";
 import FAQ from "@/components/FAQ";
 import CtaBanner from "@/components/CtaBanner";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import FloatingCTA from "@/components/FloatingCTA";
 
 export default function Home() {
   return (
@@ -21,13 +24,16 @@ export default function Home() {
         <Solutions />
         <Comparison />
         <TechSpec />
+        <Testimonials />
         <UseCases />
         <Demo />
+        <Pricing />
         <FAQ />
         <CtaBanner />
         <Contact />
       </main>
       <Footer />
+      <FloatingCTA />
     </div>
   );
 }

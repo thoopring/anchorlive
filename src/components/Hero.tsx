@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import Image from "next/image";
+import HeroMockup from "./HeroMockup";
 
 function useReveal(threshold = 0.12) {
   const ref = useRef<HTMLDivElement>(null);
@@ -49,6 +49,56 @@ function R({
   );
 }
 
+/* Animated counter */
+function Counter({ target, suffix = "" }: { target: string; suffix?: string }) {
+  const [count, setCount] = useState(0);
+  const [started, setStarted] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const numericPart = parseInt(target.replace(/[^0-9]/g, ""), 10);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStarted(true);
+          obs.unobserve(el);
+        }
+      },
+      { threshold: 0.5 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+    let frame: number;
+    const duration = 1500;
+    const start = performance.now();
+    const step = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * numericPart));
+      if (progress < 1) frame = requestAnimationFrame(step);
+    };
+    frame = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frame);
+  }, [started, numericPart]);
+
+  const prefix = target.startsWith("<") ? "<" : "";
+
+  return (
+    <div ref={ref}>
+      <span className="text-2xl font-extrabold text-primary">
+        {prefix}{count}{suffix}
+      </span>
+    </div>
+  );
+}
+
 export default function Hero() {
   return (
     <section
@@ -64,6 +114,14 @@ export default function Hero() {
           backgroundImage:
             "radial-gradient(circle at 1px 1px, rgba(225,112,85,.04) 1px, transparent 0)",
           backgroundSize: "32px 32px",
+        }}
+      />
+
+      {/* Gradient orb decoration */}
+      <div
+        className="absolute -top-[200px] -right-[200px] w-[500px] h-[500px] rounded-full opacity-20 pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, #E17055 0%, transparent 70%)",
         }}
       />
 
@@ -120,36 +178,31 @@ export default function Hero() {
 
             <R delay={0.2}>
               <div className="flex gap-8 flex-wrap">
-                {[
-                  { n: "150+", l: "도입 고객사" },
-                  { n: "<1초", l: "방송 지연" },
-                  { n: "15년", l: "업계 경력" },
-                ].map((s) => (
-                  <div key={s.l}>
-                    <span className="text-2xl font-extrabold text-primary">
-                      {s.n}
-                    </span>
-                    <span className="block text-[13px] text-gray-400 mt-0.5">
-                      {s.l}
-                    </span>
-                  </div>
-                ))}
+                <div>
+                  <Counter target="150" suffix="+" />
+                  <span className="block text-[13px] text-gray-400 mt-0.5">
+                    도입 고객사
+                  </span>
+                </div>
+                <div>
+                  <Counter target="<1" suffix="초" />
+                  <span className="block text-[13px] text-gray-400 mt-0.5">
+                    방송 지연
+                  </span>
+                </div>
+                <div>
+                  <Counter target="15" suffix="년" />
+                  <span className="block text-[13px] text-gray-400 mt-0.5">
+                    업계 경력
+                  </span>
+                </div>
               </div>
             </R>
           </div>
 
-          {/* Right mockup */}
+          {/* Right mockup — CSS-based product preview */}
           <R delay={0.1}>
-            <div className="rounded-[20px] overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,.12)]">
-              <Image
-                src="/images/hero-mockup.png"
-                alt="앵커라이브 2.0 실시간 증권방송 화면 - 캔들차트, LIVE 방송, 실시간 채팅"
-                width={1200}
-                height={800}
-                className="w-full h-auto"
-                priority
-              />
-            </div>
+            <HeroMockup />
           </R>
         </div>
       </div>

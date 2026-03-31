@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mic, MonitorPlay, Phone, Smartphone } from "lucide-react";
+import { Mic, MonitorPlay, Phone, Smartphone, ExternalLink } from "lucide-react";
 import R from "./RevealWrapper";
 
 export default function Demo() {
@@ -13,9 +13,13 @@ export default function Demo() {
         <R>
           <span className="text-sm font-bold text-primary tracking-[.04em]">LIVE DEMO</span>
           <h2 className="text-heading-section text-dark mt-2.5 mb-3">직접 체험해보세요</h2>
-          <p className="text-base text-gray-500 mb-10">
+          <p className="text-base text-gray-500 mb-3">
             방송자와 시청자 화면을 모두 체험할 수 있습니다. 회원가입 없이 즉시 이용 가능합니다.
           </p>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/10 text-xs font-semibold text-accent mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent" style={{ animation: "pulse 2s infinite" }} />
+            데모 서버 운영 중
+          </div>
         </R>
 
         <R delay={0.05}>
@@ -64,7 +68,7 @@ export default function Demo() {
                       "방송 녹화 기능",
                     ].map((t) => (
                       <span key={t} className="text-sm text-gray-600 flex items-center gap-1.5">
-                        <span className="text-[11px] text-primary">✓</span>
+                        <span className="text-[11px] text-primary">&#10003;</span>
                         {t}
                       </span>
                     ))}
@@ -73,19 +77,50 @@ export default function Demo() {
                     href="https://live.anchorlive.co.kr/broadcasterLive?type=F&site_no=1&user_id=demo&room_code=DEMO"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block px-8 py-[13px] rounded-[10px] bg-dark text-white text-[15px] font-semibold no-underline hover:bg-gray-800 transition-colors"
+                    className="inline-flex items-center gap-2 px-8 py-[13px] rounded-[10px] bg-dark text-white text-[15px] font-semibold no-underline hover:bg-gray-800 transition-colors"
                   >
-                    방송 시작하기 →
+                    방송 시작하기
+                    <ExternalLink className="w-4 h-4" />
                   </a>
                 </div>
-                <div className="bg-dark rounded-card p-5 text-center">
-                  <div
-                    className="rounded-[10px] h-[180px] flex items-center justify-center mb-3"
-                    style={{ background: "linear-gradient(180deg, #1E293B, #0F172A)" }}
-                  >
-                    <Mic className="w-12 h-12 text-white/20" />
+                {/* Broadcaster preview mockup */}
+                <div className="bg-[#0F172A] rounded-card p-4 border border-white/5">
+                  <div className="rounded-lg overflow-hidden" style={{ background: "linear-gradient(180deg, #1E293B, #0F172A)" }}>
+                    <div className="p-4 pb-3">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-2">
+                          <div className="px-2 py-0.5 rounded bg-red-500/80 text-[9px] font-bold text-white flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-white" style={{ animation: "pulse 2s infinite" }} />
+                            LIVE
+                          </div>
+                          <span className="text-[10px] text-[#64748B]">00:15:32</span>
+                        </div>
+                        <span className="text-[10px] text-[#64748B]">127명 시청 중</span>
+                      </div>
+                      {/* Chart area */}
+                      <div className="h-[100px] flex items-end gap-[2px] mb-3">
+                        {Array.from({ length: 30 }, (_, i) => (
+                          <div
+                            key={i}
+                            className="flex-1 rounded-t-[1px]"
+                            style={{
+                              height: `${30 + Math.sin(i * 0.5) * 25 + Math.random() * 20}%`,
+                              background: i > 22 ? "#22C55E" : "#334155",
+                            }}
+                          />
+                        ))}
+                      </div>
+                      {/* Toolbar */}
+                      <div className="flex gap-1.5">
+                        {["MIC", "CAM", "화면", "그리기", "배경"].map((t) => (
+                          <div key={t} className="px-2 py-1 rounded bg-white/5 text-[8px] text-[#94A3B8]">
+                            {t}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-xs text-[#64748B]">클릭 시 새 창에서 방송 화면이 열립니다</p>
+                  <p className="text-xs text-[#64748B] text-center mt-3">클릭 시 새 창에서 방송 화면이 열립니다</p>
                 </div>
               </div>
             ) : (
@@ -104,7 +139,7 @@ export default function Demo() {
                       "접속자 리스트 확인",
                     ].map((t) => (
                       <span key={t} className="text-sm text-gray-600 flex items-center gap-1.5">
-                        <span className="text-[11px] text-accent">✓</span>
+                        <span className="text-[11px] text-accent">&#10003;</span>
                         {t}
                       </span>
                     ))}
@@ -117,7 +152,8 @@ export default function Demo() {
                       className="flex items-center gap-1.5 px-7 py-[13px] rounded-[10px] bg-dark text-white text-[15px] font-semibold no-underline hover:bg-gray-800 transition-colors"
                     >
                       <Phone className="w-4 h-4" />
-                      PC 시청 →
+                      PC 시청
+                      <ExternalLink className="w-3.5 h-3.5 ml-0.5" />
                     </a>
                     <a
                       href="https://live.anchorlive.co.kr/mo/moViewLive?type=F&site_no=1&user_id=viewer&room_code=DEMO"
@@ -126,21 +162,69 @@ export default function Demo() {
                       className="flex items-center gap-1.5 px-7 py-[13px] rounded-[10px] bg-gray-100 text-gray-800 text-[15px] font-semibold no-underline hover:bg-gray-200 transition-colors"
                     >
                       <Smartphone className="w-4 h-4" />
-                      모바일 시청 →
+                      모바일 시청
+                      <ExternalLink className="w-3.5 h-3.5 ml-0.5" />
                     </a>
                   </div>
                 </div>
-                <div className="bg-dark rounded-card p-5 text-center">
-                  <div
-                    className="rounded-[10px] h-[180px] flex items-center justify-center mb-3"
-                    style={{ background: "linear-gradient(180deg, #1E293B, #0F172A)" }}
-                  >
-                    <MonitorPlay className="w-12 h-12 text-white/20" />
+                {/* Viewer preview mockup */}
+                <div className="bg-[#0F172A] rounded-card p-4 border border-white/5">
+                  <div className="grid grid-cols-[1fr_120px] gap-0 rounded-lg overflow-hidden" style={{ background: "linear-gradient(180deg, #1E293B, #0F172A)" }}>
+                    {/* Video */}
+                    <div className="p-3">
+                      <div className="h-[120px] rounded bg-gradient-to-br from-[#1a2332] to-[#0d1421] flex items-center justify-center mb-2">
+                        <MonitorPlay className="w-8 h-8 text-white/10" />
+                      </div>
+                      <div className="flex gap-1.5">
+                        <div className="px-1.5 py-0.5 rounded bg-white/5 text-[8px] text-[#94A3B8]">720p</div>
+                        <div className="px-1.5 py-0.5 rounded bg-white/5 text-[8px] text-[#94A3B8]">1x</div>
+                        <div className="flex-1" />
+                        <div className="px-1.5 py-0.5 rounded bg-white/5 text-[8px] text-[#94A3B8]">전체화면</div>
+                      </div>
+                    </div>
+                    {/* Chat */}
+                    <div className="border-l border-white/5 p-2 flex flex-col">
+                      <span className="text-[8px] text-white/40 mb-1.5">채팅</span>
+                      <div className="flex-1 flex flex-col gap-1 overflow-hidden">
+                        {[
+                          { name: "김투자", msg: "감사합니다" },
+                          { name: "박차트", msg: "진입가 알려주세요" },
+                          { name: "이분석", msg: "좋은 방송이에요" },
+                          { name: "최매매", msg: "목표가는요?" },
+                        ].map((c, i) => (
+                          <div key={i} className="text-[7px]">
+                            <span className="text-[#3B82F6]">{c.name}</span>
+                            <span className="text-[#64748B] ml-1">{c.msg}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-xs text-[#64748B]">PC/모바일 각각 최적화된 화면이 열립니다</p>
+                  <p className="text-xs text-[#64748B] text-center mt-3">PC/모바일 각각 최적화된 화면이 열립니다</p>
                 </div>
               </div>
             )}
+          </div>
+        </R>
+
+        {/* Demo guide */}
+        <R delay={0.15}>
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+            {[
+              { step: "1", title: "데모 페이지 접속", desc: "위 버튼을 클릭하면 새 창에서 방송/시청 화면이 열립니다." },
+              { step: "2", title: "기능 체험", desc: "화면 공유, PIP, 실시간 그리기, 채팅 등 주요 기능을 직접 사용해보세요." },
+              { step: "3", title: "상담 신청", desc: "체험 후 도입 문의를 주시면 전담 매니저가 맞춤 안내해드립니다." },
+            ].map((s) => (
+              <div key={s.step} className="flex gap-3 p-4 rounded-card bg-gray-50 border border-gray-200">
+                <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                  <span className="text-xs font-bold text-primary">{s.step}</span>
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-dark mb-0.5">{s.title}</p>
+                  <p className="text-xs text-gray-500 leading-relaxed">{s.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </R>
       </div>
