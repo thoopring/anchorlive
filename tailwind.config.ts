@@ -9,26 +9,25 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        blue: {
-          light: "#E8F3FF",
-          DEFAULT: "#3182F6",
-          dark: "#1B64DA",
+        primary: {
+          DEFAULT: "#E17055",
+          dark: "#C0513A",
+          light: "#FDEAE5",
+          50: "#FFF5F2",
         },
-        mint: "#00C9B7",
+        accent: {
+          DEFAULT: "#00C9B7",
+          light: "#E6FAF7",
+        },
         dark: "#191F28",
         gray: {
           50: "#F9FAFB",
           100: "#F2F4F6",
           200: "#E5E8EB",
-          300: "#D1D6DB",
-          400: "#B0B8C1",
-          500: "#8B95A1",
-          600: "#6B7684",
-          700: "#4E5968",
+          400: "#8B95A1",
+          500: "#6B7684",
+          600: "#4E5968",
           800: "#333D4B",
-          900: "#191F28",
         },
       },
       fontFamily: {
@@ -46,6 +45,27 @@ const config: Config = {
           "Malgun Gothic",
           "sans-serif",
         ],
+        mono: ["JetBrains Mono", "monospace"],
+      },
+      fontSize: {
+        "heading-hero": [
+          "clamp(32px, 4.5vw, 48px)",
+          { lineHeight: "1.25", letterSpacing: "-0.04em", fontWeight: "800" },
+        ],
+        "heading-section": [
+          "clamp(26px, 3.5vw, 38px)",
+          { lineHeight: "1.3", letterSpacing: "-0.03em", fontWeight: "800" },
+        ],
+        "heading-sub": [
+          "clamp(24px, 3vw, 34px)",
+          { lineHeight: "1.35", letterSpacing: "-0.03em", fontWeight: "800" },
+        ],
+      },
+      borderRadius: {
+        card: "16px",
+      },
+      maxWidth: {
+        site: "1200px",
       },
     },
   },
