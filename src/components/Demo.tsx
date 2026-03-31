@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Mic, MonitorPlay, Phone, Smartphone, ExternalLink } from "lucide-react";
 import R from "./RevealWrapper";
 
@@ -83,44 +84,15 @@ export default function Demo() {
                     <ExternalLink className="w-4 h-4" />
                   </a>
                 </div>
-                {/* Broadcaster preview mockup */}
-                <div className="bg-[#0F172A] rounded-card p-4 border border-white/5">
-                  <div className="rounded-lg overflow-hidden" style={{ background: "linear-gradient(180deg, #1E293B, #0F172A)" }}>
-                    <div className="p-4 pb-3">
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center gap-2">
-                          <div className="px-2 py-0.5 rounded bg-red-500/80 text-[9px] font-bold text-white flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-white" style={{ animation: "pulse 2s infinite" }} />
-                            LIVE
-                          </div>
-                          <span className="text-[10px] text-[#64748B]">00:15:32</span>
-                        </div>
-                        <span className="text-[10px] text-[#64748B]">127명 시청 중</span>
-                      </div>
-                      {/* Chart area */}
-                      <div className="h-[100px] flex items-end gap-[2px] mb-3">
-                        {Array.from({ length: 30 }, (_, i) => (
-                          <div
-                            key={i}
-                            className="flex-1 rounded-t-[1px]"
-                            style={{
-                              height: `${30 + Math.sin(i * 0.5) * 25 + Math.random() * 20}%`,
-                              background: i > 22 ? "#22C55E" : "#334155",
-                            }}
-                          />
-                        ))}
-                      </div>
-                      {/* Toolbar */}
-                      <div className="flex gap-1.5">
-                        {["MIC", "CAM", "화면", "그리기", "배경"].map((t) => (
-                          <div key={t} className="px-2 py-1 rounded bg-white/5 text-[8px] text-[#94A3B8]">
-                            {t}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <p className="text-xs text-[#64748B] text-center mt-3">클릭 시 새 창에서 방송 화면이 열립니다</p>
+                {/* Broadcaster preview image */}
+                <div className="rounded-card overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,.12)] border border-gray-200">
+                  <Image
+                    src="/images/demo-broadcaster.png"
+                    alt="앵커라이브 방송자 화면 - HTS 화면 공유, PIP, 실시간 그리기"
+                    width={800}
+                    height={600}
+                    className="w-full h-auto"
+                  />
                 </div>
               </div>
             ) : (
@@ -167,40 +139,15 @@ export default function Demo() {
                     </a>
                   </div>
                 </div>
-                {/* Viewer preview mockup */}
-                <div className="bg-[#0F172A] rounded-card p-4 border border-white/5">
-                  <div className="grid grid-cols-[1fr_120px] gap-0 rounded-lg overflow-hidden" style={{ background: "linear-gradient(180deg, #1E293B, #0F172A)" }}>
-                    {/* Video */}
-                    <div className="p-3">
-                      <div className="h-[120px] rounded bg-gradient-to-br from-[#1a2332] to-[#0d1421] flex items-center justify-center mb-2">
-                        <MonitorPlay className="w-8 h-8 text-white/10" />
-                      </div>
-                      <div className="flex gap-1.5">
-                        <div className="px-1.5 py-0.5 rounded bg-white/5 text-[8px] text-[#94A3B8]">720p</div>
-                        <div className="px-1.5 py-0.5 rounded bg-white/5 text-[8px] text-[#94A3B8]">1x</div>
-                        <div className="flex-1" />
-                        <div className="px-1.5 py-0.5 rounded bg-white/5 text-[8px] text-[#94A3B8]">전체화면</div>
-                      </div>
-                    </div>
-                    {/* Chat */}
-                    <div className="border-l border-white/5 p-2 flex flex-col">
-                      <span className="text-[8px] text-white/40 mb-1.5">채팅</span>
-                      <div className="flex-1 flex flex-col gap-1 overflow-hidden">
-                        {[
-                          { name: "김투자", msg: "감사합니다" },
-                          { name: "박차트", msg: "진입가 알려주세요" },
-                          { name: "이분석", msg: "좋은 방송이에요" },
-                          { name: "최매매", msg: "목표가는요?" },
-                        ].map((c, i) => (
-                          <div key={i} className="text-[7px]">
-                            <span className="text-[#3B82F6]">{c.name}</span>
-                            <span className="text-[#64748B] ml-1">{c.msg}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <p className="text-xs text-[#64748B] text-center mt-3">PC/모바일 각각 최적화된 화면이 열립니다</p>
+                {/* Viewer preview image */}
+                <div className="rounded-card overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,.12)] border border-gray-200">
+                  <Image
+                    src="/images/demo-viewer.png"
+                    alt="앵커라이브 시청자 화면 - 실시간 영상, 채팅, 화질 선택"
+                    width={800}
+                    height={600}
+                    className="w-full h-auto"
+                  />
                 </div>
               </div>
             )}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import HeroMockup from "./HeroMockup";
+import Image from "next/image";
 
 function useReveal(threshold = 0.12) {
   const ref = useRef<HTMLDivElement>(null);
@@ -200,9 +200,18 @@ export default function Hero() {
             </R>
           </div>
 
-          {/* Right mockup — CSS-based product preview */}
+          {/* Right mockup */}
           <R delay={0.1}>
-            <HeroMockup />
+            <div className="rounded-[20px] overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,.12)]">
+              <Image
+                src="/images/hero-mockup.png"
+                alt="앵커라이브 2.0 실시간 증권방송 화면 - 캔들차트, LIVE 방송, 실시간 채팅"
+                width={1200}
+                height={800}
+                className="w-full h-auto"
+                priority
+              />
+            </div>
           </R>
         </div>
       </div>
